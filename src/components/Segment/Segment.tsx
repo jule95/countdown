@@ -17,8 +17,8 @@ const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size =
       closed
       fill={filled ? `black` : `white`}
       points={points}
-      x={x}
-      y={y} />
+      x={x * size}
+      y={y * size} />
   );
 };
 
