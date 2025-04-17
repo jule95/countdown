@@ -4,7 +4,7 @@ import { ISegmentProps } from './Segment.types.ts';
 import { FC, useEffect, useState } from 'react';
 import { horizontal, vertical } from './Segment.config.ts';
 
-const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size = 10 }) => {
+const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size = 10, filled = false }) => {
   const [points, setPoints] = useState<number[]>([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size =
   return (
     <Line
       closed
-      fill="black"
+      fill={filled ? `black` : `white`}
       points={points}
       x={x}
       y={y} />

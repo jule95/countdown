@@ -3,4 +3,5 @@ export interface ISegmentProps {
   y?: number;
   size?: number;
   isHorizontal?: boolean;
+  filled?: boolean;
 }
