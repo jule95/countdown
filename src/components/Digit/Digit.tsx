@@ -13,7 +13,7 @@ const Digit: FC<IDigitProps> = ({ size=10, number }) => (
       <Layer>
         {segments.map((segment, index) => (
           <Segment
-            filled={activeSegments[number].includes(index)}
+            filled={activeSegments[number]?.includes(index) ?? false}
             isHorizontal={segment.horizontal}
             size={size}
             x={segment.x}
