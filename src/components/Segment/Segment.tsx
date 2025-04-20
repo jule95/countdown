@@ -15,8 +15,10 @@ const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size =
   return (
     <Line
       closed
-      fill={filled ? `black` : `white`}
+      fill={filled ? `black` : `lightgray`}
       points={points}
+      stroke="white"
+      strokeWidth={1}
       x={x * size}
       y={y * size} />
   );

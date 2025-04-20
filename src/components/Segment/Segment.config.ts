@@ -1,2 +1,17 @@
-export const vertical = [1, 0, 2, 1, 2, 4, 1, 5, 0, 4, 0, 1];
-export const horizontal = [0, 1, 1, 0, 4, 0, 5, 1, 4, 2, 1, 2];
+export const vertical = [
+  0, 1,
+  1, 0,
+  2, 1,
+  2, 5,
+  1, 6,
+  0, 5,
+];
+
+export const horizontal = [
+  0, 1,
+  1, 0,
+  5, 0,
+  6, 1,
+  5, 2,
+  1, 2,
+];
