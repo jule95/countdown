@@ -4,7 +4,7 @@ import { intervalToDuration } from 'date-fns';
 import { ICountdownState } from './Countdown.types.ts';
 import { produce } from 'immer';
 import DoubleDigit from '../DoubleDigit/DoubleDigit.tsx';
-import DoubleColon from '../DoubleColon/DoubleColon.tsx';
+import Colon from '../Colon/Colon.tsx';
 
 const Countdown: FC = () => {
   const [state, setState] = useState<ICountdownState>({
@@ -54,12 +54,18 @@ const Countdown: FC = () => {
       {state.countdown.map((value, index) => {
         if (index < state.countdown.length - 1) {
           return (
-            <>
+            <div
+              key={`countdown-colon-digit-${index}`}
+              className="Countdown__digit">
               <DoubleDigit number={value} />
-              <DoubleColon />
-            </>);
+              <Colon />
+            </div>);
         }
-        return <DoubleDigit number={value} />;
+        return (
+          <DoubleDigit
+            key={`countdown-digit-${index}`}
+            number={value} />
+        );
       })}
     </div>
   );
