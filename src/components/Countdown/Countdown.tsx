@@ -1,75 +1,68 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import './Countdown.scss';
-import Digit from '../Digit/Digit.tsx';
-import {
-  add,
-  differenceInDays,
-  differenceInHours,
-  differenceInMinutes,
-  differenceInMonths,
-  differenceInSeconds,
-  differenceInWeeks,
-  sub
-} from 'date-fns';
-import { useEffect } from 'react';
+import { intervalToDuration } from 'date-fns';
+import { ICountdownState } from './Countdown.types.ts';
+import { produce } from 'immer';
+import DoubleDigit from '../DoubleDigit/DoubleDigit.tsx';
+import DoubleColon from '../DoubleColon/DoubleColon.tsx';
 
-// eslint-disable-next-line
-const Countdown: FC = props => {
-  // new Date(year, monthIndex, day, hours, minutes, seconds, milliseconds)
-  const target = new Date(2025, 5, 22, 8, 0, 0);
-  const now = new Date(2025, 3, 22, 8, 0, 0);
-
-  const months = differenceInMonths(target, now);
-
-  const weeksDate = sub(target, { months });
-  const weeks = differenceInWeeks(weeksDate, now);
-
-  const daysDate = sub(weeksDate, { weeks });
-  const days = differenceInDays(daysDate, now);
-
-  const hoursDate = sub(daysDate, { days });
-  const hours = differenceInHours(hoursDate, now);
-
-  const minutesDate = sub(hoursDate, { hours });
-  const minutes = differenceInMinutes(minutesDate, now);
-
-  const secondsDate = sub(minutesDate, { minutes });
-  const seconds = differenceInSeconds(secondsDate, now);
-
-  const result = add(now, {
-    days,
-    hours,
-    minutes,
-    months,
-    seconds,
-    weeks,
+const Countdown: FC = () => {
+  const [state, setState] = useState<ICountdownState>({
+    countdown: [],
+    target: null,
   });
-  const success = target.getTime() === result.getTime();
-
-  console.log(target);
-  console.log(result);
-  console.log(success);
 
   useEffect(() => {
+    // API call goes here ...
+    setState(produce(draft => {
+      draft.target = new Date(2025, 5, 28, 22, 0, 0);
+    }));
+  }, []);
+
+  useEffect(() => {
+    if (!state.target) {
+      return;
+    }
+
     const interval = setInterval(() => {
-      // countdown goes here ...
-    }, 1000/3);
+      const duration = intervalToDuration({
+        end: state.target!,
+        start: new Date(),
+      });
+
+      const countdown = [
+        duration.months ?? 0,
+        Math.floor((duration.days ?? 0) / 7),
+        (duration.days ?? 0) % 7,
+        duration.hours ?? 0,
+        duration.minutes ?? 0,
+        duration.seconds ?? 0,
+      ];
+
+      setState(produce(draft => {
+        draft.countdown = countdown;
+      }));
+    }, 250);
 
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [state.target]);
 
   return (
     <div className="Countdown">
-      <Digit
-        number={0}
-        size={10} />
-      <Digit
-        number={1}
-        size={10} />
+      {state.countdown.map((value, index) => {
+        if (index < state.countdown.length - 1) {
+          return (
+            <>
+              <DoubleDigit number={value} />
+              <DoubleColon />
+            </>);
+        }
+        return <DoubleDigit number={value} />;
+      })}
     </div>
-  )
-}
+  );
+};
 
 export default Countdown;
