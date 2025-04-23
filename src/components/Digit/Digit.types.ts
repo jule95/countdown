@@ -1,4 +1,5 @@
 export interface IDigitProps {
-  size?: number;
+  className?: string;
   number: number;
+  size?: number;
 }
