@@ -1,8 +1,12 @@
 import Countdown from '../../components/Countdown/Countdown.tsx';
+import './Home.scss';
 
 const Home = () => (
-  <div>
-    <Countdown />
+  <div className="Home">
+    <div className="Home__content">
+      <h2 className="Home__content-title">Title/Logo</h2>
+      <Countdown />
+    </div>
   </div>
 );
 
