@@ -1,0 +1,8 @@
+.DoubleDigit {
+  display: flex;
+  flex-direction: row;
+
+  &__digit {
+    margin-right: 8px;
+  }
+}
