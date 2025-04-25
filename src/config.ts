@@ -1,6 +1,6 @@
 const config = {
   api: {
-    users: `/users`,
+    countdown: `/countdown`,
   },
   routes: {
     home: `/`,

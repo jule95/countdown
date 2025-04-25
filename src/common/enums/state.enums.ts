@@ -1,3 +1,4 @@
-export enum EMessageActions {
-  SET_MESSAGE,
+export enum ECountdownActions {
+  SET_TITLE,
+  SET_TARGET,
 }
