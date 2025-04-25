@@ -18,7 +18,7 @@ const Countdown: FC = () => {
       t(`countdown.days`),
       t(`countdown.hours`),
       t(`countdown.minutes`),
-      t(`countdown.seconds`)
+      t(`countdown.seconds`),
     ],
     target: null,
   });
@@ -62,16 +62,14 @@ const Countdown: FC = () => {
 
   return (
     <div className="Countdown">
-      {state.countdown.map((value, index) => {
-        return (
-          <>
-            <DoubleDigit
-              label={state.labels[index]}
-              number={value} />
-            {index < state.countdown.length - 1 && <Colon />}
-          </>
-        );
-      })}
+      {state.countdown.map((value, index) => (
+        <>
+          <DoubleDigit
+            label={state.labels[index]}
+            number={value} />
+          {index < state.countdown.length - 1 && <Colon />}
+        </>
+      ))}
     </div>
   );
 };
