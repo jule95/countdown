@@ -5,10 +5,21 @@ import { ICountdownState } from './Countdown.types.ts';
 import { produce } from 'immer';
 import DoubleDigit from '../DoubleDigit/DoubleDigit.tsx';
 import Colon from '../Colon/Colon.tsx';
+import { useTranslation } from 'react-i18next';
 
 const Countdown: FC = () => {
+  const { t } = useTranslation();
+
   const [state, setState] = useState<ICountdownState>({
     countdown: [],
+    labels: [
+      t(`countdown.months`),
+      t(`countdown.weeks`),
+      t(`countdown.days`),
+      t(`countdown.hours`),
+      t(`countdown.minutes`),
+      t(`countdown.seconds`)
+    ],
     target: null,
   });
 
@@ -52,19 +63,13 @@ const Countdown: FC = () => {
   return (
     <div className="Countdown">
       {state.countdown.map((value, index) => {
-        if (index < state.countdown.length - 1) {
-          return (
-            <div
-              key={`countdown-colon-digit-${index}`}
-              className="Countdown__digit">
-              <DoubleDigit number={value} />
-              <Colon />
-            </div>);
-        }
         return (
-          <DoubleDigit
-            key={`countdown-digit-${index}`}
-            number={value} />
+          <>
+            <DoubleDigit
+              label={state.labels[index]}
+              number={value} />
+            {index < state.countdown.length - 1 && <Colon />}
+          </>
         );
       })}
     </div>
