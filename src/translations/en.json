@@ -1,6 +1,13 @@
 {
   "translation": {
     "home": "Home",
-    "page1": "Page 1"
+    "countdown": {
+      "months": "Months",
+      "weeks": "Weeks",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    }
   }
 }
