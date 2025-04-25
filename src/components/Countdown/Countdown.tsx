@@ -55,20 +55,20 @@ const Countdown: FC = () => {
     }
 
     const interval = setInterval(() => {
-    }, 250);
-    const duration = intervalToDuration({
-      end: state.target!,
-      start: new Date(),
-    });
+      const duration = intervalToDuration({
+        end: state.target!,
+        start: new Date(),
+      });
 
-    setCountdownState(produce(draft => {
-      draft.countdown.months =  duration.months ?? 0;
-      draft.countdown.weeks =  Math.floor((duration.days ?? 0) / 7);
-      draft.countdown.days =   (duration.days ?? 0) % 7;
-      draft.countdown.hours =  duration.hours ?? 0;
-      draft.countdown.minutes =  duration.minutes ?? 0;
-      draft.countdown.seconds =   duration.seconds ?? 0;
-    }));
+      setCountdownState(produce(draft => {
+        draft.countdown.months =  duration.months ?? 0;
+        draft.countdown.weeks =  Math.floor((duration.days ?? 0) / 7);
+        draft.countdown.days =   (duration.days ?? 0) % 7;
+        draft.countdown.hours =  duration.hours ?? 0;
+        draft.countdown.minutes =  duration.minutes ?? 0;
+        draft.countdown.seconds =   duration.seconds ?? 0;
+      }));
+    }, 250);
 
     return () => {
       clearInterval(interval);
