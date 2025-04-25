@@ -1,11 +1,25 @@
 import './Segment.scss';
 import { Line } from 'react-konva';
 import { ISegmentProps } from './Segment.types.ts';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { horizontal, vertical } from './Segment.config.ts';
+import Konva from 'konva';
 
 const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size = 10, filled = false }) => {
   const [points, setPoints] = useState<number[]>([]);
+  const segmentRef = useRef(null);
+
+  useEffect(() => {
+    if (!segmentRef.current) {
+      return;
+    }
+    // @ts-expect-error TS2339
+    segmentRef.current.to({
+      duration: 0.150,
+      easing: Konva.Easings.Linear,
+      fill: filled ? `black` : `lightgray`,
+    });
+  }, [filled]);
 
   useEffect(() => {
     const tempPoints = isHorizontal ? horizontal : vertical;
@@ -14,8 +28,8 @@ const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size =
 
   return (
     <Line
+      ref={segmentRef}
       closed
-      fill={filled ? `black` : `lightgray`}
       points={points}
       stroke="white"
       strokeWidth={1}

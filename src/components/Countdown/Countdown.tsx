@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys */
+
 import { FC, useContext, useEffect, useState } from 'react';
 import './Countdown.scss';
 import { intervalToDuration } from 'date-fns';
@@ -12,7 +14,14 @@ import AppContext from '../../state/app-context.ts';
 const Countdown: FC = () => {
   const { t } = useTranslation();
   const [countdownState, setCountdownState] = useState<ICountdownState>({
-    countdown: [],
+    countdown: {
+      months: 0,
+      weeks: 0,
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    },
     labels: [
       t(`countdown.months`),
       t(`countdown.weeks`),
@@ -46,24 +55,20 @@ const Countdown: FC = () => {
     }
 
     const interval = setInterval(() => {
-      const duration = intervalToDuration({
-        end: state.target!,
-        start: new Date(),
-      });
-
-      const countdown = [
-        duration.months ?? 0,
-        Math.floor((duration.days ?? 0) / 7),
-        (duration.days ?? 0) % 7,
-        duration.hours ?? 0,
-        duration.minutes ?? 0,
-        duration.seconds ?? 0,
-      ];
-
-      setCountdownState(produce(draft => {
-        draft.countdown = countdown;
-      }));
     }, 250);
+    const duration = intervalToDuration({
+      end: state.target!,
+      start: new Date(),
+    });
+
+    setCountdownState(produce(draft => {
+      draft.countdown.months =  duration.months ?? 0;
+      draft.countdown.weeks =  Math.floor((duration.days ?? 0) / 7);
+      draft.countdown.days =   (duration.days ?? 0) % 7;
+      draft.countdown.hours =  duration.hours ?? 0;
+      draft.countdown.minutes =  duration.minutes ?? 0;
+      draft.countdown.seconds =   duration.seconds ?? 0;
+    }));
 
     return () => {
       clearInterval(interval);
@@ -72,12 +77,12 @@ const Countdown: FC = () => {
 
   return (
     <div className="Countdown">
-      {countdownState.countdown.map((value, index) => (
+      {Object.values(countdownState.countdown).map((value, index, arr) => (
         <>
           <DoubleDigit
             label={countdownState.labels[index]}
             number={value} />
-          {index < countdownState.countdown.length - 1 && <Colon />}
+          {index < arr.length - 1 && <Colon />}
         </>
       ))}
     </div>

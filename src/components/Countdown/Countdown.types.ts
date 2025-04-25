@@ -1,4 +1,11 @@
 export interface ICountdownState {
-  countdown: number[];
+  countdown: {
+    months: number;
+    weeks: number;
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  }
   labels: string[];
 }
