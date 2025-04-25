@@ -1,17 +1,19 @@
-import { EMessageActions } from '../enums/state.enums';
+import { ECountdownActions } from '../enums/state.enums';
 
 export interface IStateAction {
-  type: EMessageActions;
+  type: ECountdownActions;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload: any; // ToDo: Figure this out.
 }
 
 export interface IAppState {
-  message: string;
+  title: string;
+  target: Date | null;
 }
 
 export interface IAppActions {
-  setMessage: (payload: string) => void;
+  setTitle: (payload: string) => void;
+  setTarget: (payload: Date) => void;
 }
 
 export interface IAppContext {

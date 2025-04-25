@@ -2,15 +2,18 @@ import { createContext } from 'react';
 import { IAppContext, IAppState } from '../common/interfaces/state.interfaces';
 
 export const initState: IAppState = {
-  message: ``,
+  target: null,
+  title: ``,
 };
 
 const AppContext = createContext<IAppContext>({
   actions: {
-    setMessage: () => {},
+    setTarget: () => {},
+    setTitle: () => {},
   },
   state: {
-    message: ``,
+    target: null,
+    title: ``,
   },
 });
 

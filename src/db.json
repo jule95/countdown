@@ -1,9 +1,6 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "name": "John",
-      "email": "john@doe.com"
-    }
-  ]
+  "countdown": {
+    "target": 1751140800000,
+    "title": "ENEI"
+  }
 }

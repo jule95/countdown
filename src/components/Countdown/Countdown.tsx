@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import './Countdown.scss';
 import { intervalToDuration } from 'date-fns';
 import { ICountdownState } from './Countdown.types.ts';
@@ -6,11 +6,12 @@ import { produce } from 'immer';
 import DoubleDigit from '../DoubleDigit/DoubleDigit.tsx';
 import Colon from '../Colon/Colon.tsx';
 import { useTranslation } from 'react-i18next';
+import useCountdown from '../../api/useCountdown.ts';
+import AppContext from '../../state/app-context.ts';
 
 const Countdown: FC = () => {
   const { t } = useTranslation();
-
-  const [state, setState] = useState<ICountdownState>({
+  const [countdownState, setCountdownState] = useState<ICountdownState>({
     countdown: [],
     labels: [
       t(`countdown.months`),
@@ -20,15 +21,24 @@ const Countdown: FC = () => {
       t(`countdown.minutes`),
       t(`countdown.seconds`),
     ],
-    target: null,
   });
+  const [apiActions, apiState] = useCountdown();
+  const { actions, state } = useContext(AppContext);
 
   useEffect(() => {
-    // API call goes here ...
-    setState(produce(draft => {
-      draft.target = new Date(2025, 5, 28, 22, 0, 0);
-    }));
+    void apiActions.getCountdown();
+    // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (!apiState.response) {
+      return;
+    }
+
+    actions.setTarget(new Date(apiState.response.target));
+    actions.setTitle(apiState.response.title);
+    // eslint-disable-next-line
+  }, [apiState.response]);
 
   useEffect(() => {
     if (!state.target) {
@@ -50,7 +60,7 @@ const Countdown: FC = () => {
         duration.seconds ?? 0,
       ];
 
-      setState(produce(draft => {
+      setCountdownState(produce(draft => {
         draft.countdown = countdown;
       }));
     }, 250);
@@ -62,12 +72,12 @@ const Countdown: FC = () => {
 
   return (
     <div className="Countdown">
-      {state.countdown.map((value, index) => (
+      {countdownState.countdown.map((value, index) => (
         <>
           <DoubleDigit
-            label={state.labels[index]}
+            label={countdownState.labels[index]}
             number={value} />
-          {index < state.countdown.length - 1 && <Colon />}
+          {index < countdownState.countdown.length - 1 && <Colon />}
         </>
       ))}
     </div>
