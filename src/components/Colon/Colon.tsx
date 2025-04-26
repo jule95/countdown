@@ -18,10 +18,8 @@ const Colon: FC<IColonProps> = ({ size = 1.5 }) => {
           width={colonWidth * size}>
           <Layer>
             <Point
-              filled
               size={size} />
             <Point
-              filled
               size={size}
               y={10} />
           </Layer>
