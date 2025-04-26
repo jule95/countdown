@@ -7,7 +7,7 @@ import theme from './theme/theme.ts';
 const App = () => (
   <div className="App">
     <ThemeProvider theme={theme}>
-      <CssBaseline />
+      <CssBaseline enableColorScheme />
       <Container>
         <Outlet />
       </Container>

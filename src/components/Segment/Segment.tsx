@@ -4,10 +4,12 @@ import { ISegmentProps } from './Segment.types.ts';
 import { FC, useEffect, useRef, useState } from 'react';
 import { horizontal, vertical } from './Segment.config.ts';
 import Konva from 'konva';
+import { useTheme } from '@mui/material';
 
 const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size = 10, filled = false }) => {
   const [points, setPoints] = useState<number[]>([]);
   const segmentRef = useRef(null);
+  const theme = useTheme();
 
   useEffect(() => {
     if (!segmentRef.current) {
@@ -17,7 +19,8 @@ const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size =
     segmentRef.current.to({
       duration: 0.150,
       easing: Konva.Easings.Linear,
-      fill: filled ? `black` : `lightgray`,
+      fill: theme.countdown.fillColor,
+      opacity: filled ? 0.95 : 0.3,
     });
   }, [filled]);
 
@@ -31,7 +34,7 @@ const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size =
       ref={segmentRef}
       closed
       points={points}
-      stroke="white"
+      stroke={theme.countdown.strokeColor}
       strokeWidth={1}
       x={x * size}
       y={y * size} />

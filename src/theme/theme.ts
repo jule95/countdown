@@ -1,25 +1,18 @@
 import { createTheme } from '@mui/material/styles';
-
-// ToDo: Move to separate declaration file (https://github.com/jule95/countdown/issues/7).
-// eslint-disable-next-line quotes
-declare module '@mui/material/styles' {
-  interface Theme {
-    status: {
-      danger: string;
-    };
-  }
-
-  interface ThemeOptions {
-    status?: {
-      danger?: string;
-    };
-  }
-}
-
+import { grey } from '@mui/material/colors';
 
 const theme = createTheme({
+  countdown: {
+    fillColor: `#BF360C`,
+    strokeColor: `#121212`,
+  },
   palette: {
     mode: `dark`,
+  },
+  typography: {
+    allVariants: {
+      color: grey[100],
+    },
   },
 });
 
