@@ -1,9 +1,9 @@
 import { createTheme } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
+import { grey, orange } from '@mui/material/colors';
 
 const theme = createTheme({
   countdown: {
-    fillColor: `#BF360C`,
+    fillColor: orange[900],
     strokeColor: `#121212`,
   },
   palette: {
@@ -11,7 +11,7 @@ const theme = createTheme({
   },
   typography: {
     allVariants: {
-      color: grey[100],
+      color: grey[300],
     },
   },
 });
