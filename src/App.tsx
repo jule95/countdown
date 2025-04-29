@@ -1,13 +1,17 @@
 import './App.scss';
 import { Outlet } from 'react-router-dom';
 import './App.scss';
-import { Container } from '@mui/material';
+import { Container, CssBaseline, ThemeProvider } from '@mui/material';
+import theme from './theme/theme.ts';
 
 const App = () => (
   <div className="App">
-    <Container>
-      <Outlet />
-    </Container>
+    <ThemeProvider theme={theme}>
+      <CssBaseline enableColorScheme />
+      <Container>
+        <Outlet />
+      </Container>
+    </ThemeProvider>
   </div>
 );
 
