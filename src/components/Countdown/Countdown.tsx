@@ -36,7 +36,7 @@ const Countdown: FC = () => {
 
   useEffect(() => {
     void apiActions.getCountdown();
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const Countdown: FC = () => {
 
     actions.setTarget(new Date(apiState.response.target));
     actions.setTitle(apiState.response.title);
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apiState.response]);
 
   useEffect(() => {

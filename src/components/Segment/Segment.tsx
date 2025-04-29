@@ -22,6 +22,7 @@ const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size =
       fill: theme.countdown.fillColor,
       opacity: filled ? 0.95 : 0.3,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filled]);
 
   useEffect(() => {
