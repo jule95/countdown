@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home/Home.tsx';
 import NotFound from './pages/NotFound/NotFound.tsx';
 import config from './config.ts';
+import Playground from './pages/Playground/Playground.tsx';
 
 // https://reactrouter.com/en/main/start/tutorial
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     children: [{
       element: <Home />,
       path: config.routes.home,
+    },
+    {
+      element: <Playground />,
+      path: config.routes.playground,
     }],
     element: <App />,
     errorElement: <NotFound />,
