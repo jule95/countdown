@@ -7,9 +7,10 @@ import { ICountdownState } from './Countdown.types.ts';
 import { produce } from 'immer';
 import DoubleDigit from '../DoubleDigit/DoubleDigit.tsx';
 import Colon from '../Colon/Colon.tsx';
-import { useTranslation } from 'react-i18next';
 import useCountdown from '../../api/useCountdown.ts';
 import AppContext from '../../state/app-context.ts';
+import { labels } from './Countdown.config.ts';
+import { useTranslation } from 'react-i18next';
 import { IResponseCountdown } from '../../common/interfaces/api.countdown.interfaces.ts';
 
 const Countdown: FC = () => {
@@ -23,14 +24,6 @@ const Countdown: FC = () => {
       minutes: 0,
       seconds: 0,
     },
-    labels: [
-      t(`countdown.months`),
-      t(`countdown.weeks`),
-      t(`countdown.days`),
-      t(`countdown.hours`),
-      t(`countdown.minutes`),
-      t(`countdown.seconds`),
-    ],
   });
   const [apiActions, apiState] = useCountdown();
   const { actions, state } = useContext(AppContext);
@@ -83,7 +76,7 @@ const Countdown: FC = () => {
       {Object.values(countdownState.countdown).map((value, index, arr) => (
         <>
           <DoubleDigit
-            label={countdownState.labels[index]}
+            label={t(labels[index])}
             number={value} />
           {index < arr.length - 1 && <Colon />}
         </>

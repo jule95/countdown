@@ -7,5 +7,4 @@ export interface ICountdownState {
     minutes: number;
     seconds: number;
   }
-  labels: string[];
 }
