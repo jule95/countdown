@@ -1,26 +1,28 @@
 import './LanguageSwitch.scss';
 import { FC } from 'react';
-import { ButtonBase } from '@mui/material';
-import i18n from '../../i18n.ts';
+import { ButtonBase, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import Box from '@mui/material/Box';
 
-const LanguageSwitch: FC = () => (
-  <div className="LanguageSwitch">
-    <ButtonBase
-      disableRipple
-      sx={{
-        fontWeight: i18n.language === `de` ? `bold` : `normal`,
-        marginRight: `4px`,
-      }}
-      onClick={() => i18n.changeLanguage(`de`)}>DE</ButtonBase>
-    <span>/</span>
-    <ButtonBase
-      disableRipple
-      sx={{
-        fontWeight: i18n.language === `en` ? `bold` : `normal`,
-        marginLeft: `4px`,
-      }}
-      onClick={() => i18n.changeLanguage(`en`)}>EN</ButtonBase>
-  </div>
-);
+const LanguageSwitch: FC = () => {
+  const { i18n } = useTranslation();
+
+  return (
+    <Box sx={{
+      display: `flex`,
+      flexDirection: `row`,
+    }}>
+      <ButtonBase
+        disableRipple
+        sx={{ fontWeight: i18n.language === `de` ? `bold` : `normal` }}
+        onClick={() => i18n.changeLanguage(`de`)}>DE</ButtonBase>
+      <Typography sx={{ margin: `0 4px` }}>/</Typography>
+      <ButtonBase
+        disableRipple
+        sx={{ fontWeight: i18n.language === `en` ? `bold` : `normal` }}
+        onClick={() => i18n.changeLanguage(`en`)}>EN</ButtonBase>
+    </Box>
+  );
+};
 
 export default LanguageSwitch;
