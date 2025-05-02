@@ -10,6 +10,9 @@ const appReducer = produce((draft: IAppState, action: IStateAction) => {
     case ECountdownActions.SET_TARGET:
       draft.target = action.payload;
       break;
+    case ECountdownActions.SET_MODAL:
+      draft.modal = !draft.modal;
+      break;
     default:
   }
 });

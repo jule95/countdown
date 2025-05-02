@@ -15,9 +15,14 @@ const AppState:FC<{ children: ReactElement}> = props => {
     dispatch({ payload, type: ECountdownActions.SET_TARGET });
   };
 
+  const toggleModal = () => {
+    dispatch({ type: ECountdownActions.SET_MODAL });
+  };
+
   const actions: IAppActions = {
     setTarget,
     setTitle,
+    toggleModal,
   };
 
   return (
