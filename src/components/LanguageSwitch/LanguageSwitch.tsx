@@ -1,4 +1,3 @@
-import './LanguageSwitch.scss';
 import { FC } from 'react';
 import { ButtonBase, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
