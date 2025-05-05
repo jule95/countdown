@@ -8,6 +8,12 @@
       "hours": "Hours",
       "minutes": "Minutes",
       "seconds": "Seconds"
+    },
+    "createCountdown": {
+      "heading": "Create Countdown",
+      "title": "Title",
+      "date": "Date",
+      "time": "Time"
     }
   }
 }

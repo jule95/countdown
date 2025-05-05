@@ -66,10 +66,19 @@ const Countdown: FC = () => {
       }));
     }, 250);
 
+    /*
+      If the modal is mounted, it currently makes the interval
+      behave weird and jump from one digit to another "unevenly".
+     */
+    // ToDo: Check if this breaks anything.
+    if (state.modal) {
+      clearInterval(interval);
+    }
+
     return () => {
       clearInterval(interval);
     };
-  }, [state.target]);
+  }, [state.target, state.modal]);
 
   return (
     <div className="Countdown">
