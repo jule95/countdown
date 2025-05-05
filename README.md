@@ -1,5 +1,10 @@
 # Countdown App
 
+# How To Run
+1) Install dependencies ```npm install```
+2) Start mocked REST API ```npm run db```
+1) Run App ```npm run dev```
+
 # ToDo
 - App error routes to NotFound component (https://github.com/jule95/countdown/issues/3).
 - Fix initial render flicker. (https://github.com/jule95/countdown/issues/6)
