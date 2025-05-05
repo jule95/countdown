@@ -1,15 +1,15 @@
 import { FC } from 'react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { DateField, LocalizationProvider } from '@mui/x-date-pickers';
+import { LocalizationProvider, TimeField } from '@mui/x-date-pickers';
 import { FormControl, FormLabel } from '@mui/material';
-import { IDateInputProps } from './DateInput.types.ts';
+import { ITimeInput } from './TimeInput.types.ts';
 
-const DateInput: FC<IDateInputProps> = props => (
+const TimeInput: FC<ITimeInput> = props => (
   <FormControl>
     <FormLabel>{props.label}</FormLabel>
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DateField
-        format="dd.MM.yyyy"
+      <TimeField
+        format="HH:mm"
         name={props.name}
         value={props.value}
         onChange={value => {props.onChange(props.name, value);}} />
@@ -17,4 +17,4 @@ const DateInput: FC<IDateInputProps> = props => (
   </FormControl>
 );
 
-export default DateInput;
+export default TimeInput;

@@ -1,4 +1,4 @@
-export interface IDateInputProps {
+export interface ITimeInput {
   label: string;
   name: string;
   onChange: (name: string, value: Date | null) => void;

@@ -18,6 +18,10 @@ const router = createBrowserRouter([
       path: config.routes.home,
     },
     {
+      element: <Home />,
+      path: config.routes.local,
+    },
+    {
       element: <Playground />,
       path: config.routes.playground,
     }],

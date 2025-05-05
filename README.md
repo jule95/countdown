@@ -14,3 +14,4 @@
 - Custom dialog to create locally stored countdowns.
 - Create NodeJS/NestJS backend and fetch countdown data.
 - Multiple countdowns selectable via dropdown.
+- Implement sounds for countdown.
