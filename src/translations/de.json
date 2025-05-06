@@ -10,10 +10,12 @@
       "seconds": "Sekunden"
     },
     "createCountdown": {
-      "heading": "Countdown Erstellen",
-      "title": "Titel",
-      "date": "Datum",
-      "time": "Zeit"
+      "cancel": "Cancel",
+      "create": "Create",
+      "date": "Date",
+      "heading": "Create Countdown",
+      "time": "Time",
+      "title": "Title"
     }
   }
 }

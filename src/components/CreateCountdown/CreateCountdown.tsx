@@ -37,10 +37,11 @@ const CreateCountdown: FC = () => {
       open={state.modal}
       onClose={actions.toggleModal}>
       <Box
-        component="form"
+        display="flex"
+        flexDirection="column"
+        gap={3}
         sx={modalStyles}>
         <Typography
-          sx={{ marginBottom: `24px`, textTransform: `uppercase` }}
           variant="h6">
           {t(`createCountdown.heading`)}
         </Typography>
@@ -51,7 +52,9 @@ const CreateCountdown: FC = () => {
             value={formState.title}
             onChange={handleTitleChange} />
         </FormControl>
-        <Box sx={{ marginTop: `24px` }}>
+        <Box
+          display="flex"
+          gap={2}>
           <DateInput
             label={t(`createCountdown.date`)}
             name="date"
@@ -63,17 +66,17 @@ const CreateCountdown: FC = () => {
             value={formState.time}
             onChange={handleDateChange} />
         </Box>
-        <Box sx={{
-          display: `flex`,
-          marginTop: `32px`,
-        }}>
+        <Box
+          display="flex"
+          gap={2}
+          justifyContent="end">
           <Button
             color="secondary"
             onClick={actions.toggleModal}>
-            Text
+            {t(`createCountdown.cancel`)}
           </Button>
           <Button>
-            Text
+            {t(`createCountdown.create`)}
           </Button>
         </Box>
       </Box>

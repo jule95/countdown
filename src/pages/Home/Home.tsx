@@ -12,7 +12,7 @@ const Home = () => {
       <div className="Home__content">
         <Typography 
           className="Home__content-title" 
-          variant="h2">{state.title}</Typography>
+          variant="h1">{state.title}</Typography>
         <Countdown />
       </div>
     </div>
