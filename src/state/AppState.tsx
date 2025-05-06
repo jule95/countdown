@@ -1,18 +1,14 @@
 import { FC, ReactElement, useReducer } from 'react';
 import appReducer from './app-reducer';
 import AppContext, { initState } from './app-context';
-import { IAppActions } from '../common/interfaces/state.interfaces';
+import { IAppActions, ISetCountdownPayload } from '../common/interfaces/state.interfaces';
 import { ECountdownActions } from '../common/enums/state.enums';
 
 const AppState:FC<{ children: ReactElement}> = props => {
   const [state, dispatch] = useReducer(appReducer, initState);
 
-  const setTitle = (payload: string) => {
-    dispatch({ payload, type: ECountdownActions.SET_TITLE });
-  };
-
-  const setTarget = (payload: Date) => {
-    dispatch({ payload, type: ECountdownActions.SET_TARGET });
+  const setCountdown = (payload: ISetCountdownPayload) => {
+    dispatch({ payload, type: ECountdownActions.SET_COUNTDOWN });
   };
 
   const toggleModal = () => {
@@ -20,8 +16,7 @@ const AppState:FC<{ children: ReactElement}> = props => {
   };
 
   const actions: IAppActions = {
-    setTarget,
-    setTitle,
+    setCountdown,
     toggleModal,
   };
 

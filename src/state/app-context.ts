@@ -2,21 +2,24 @@ import { createContext } from 'react';
 import { IAppContext, IAppState } from '../common/interfaces/state.interfaces';
 
 export const initState: IAppState = {
+  countdown: {
+    target: null,
+    title: ``,
+  },
   modal: false,
-  target: null,
-  title: ``,
 };
 
 const AppContext = createContext<IAppContext>({
   actions: {
-    setTarget: () => {},
-    setTitle: () => {},
+    setCountdown:() => {},
     toggleModal:() => {},
   },
   state: {
+    countdown: {
+      target: null,
+      title: ``,
+    },
     modal: false,
-    target: null,
-    title: ``,
   },
 });
 

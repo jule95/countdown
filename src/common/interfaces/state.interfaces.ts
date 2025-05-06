@@ -7,18 +7,25 @@ export interface IStateAction {
 }
 
 export interface IAppState {
-  title: string;
-  target: Date | null;
+  countdown: {
+    target: Date | null;
+    title: string;
+  };
   modal: boolean;
 }
 
 export interface IAppActions {
-  setTitle: (payload: string) => void;
-  setTarget: (payload: Date) => void;
+  setCountdown: (payload: ISetCountdownPayload) => void;
   toggleModal: () => void;
 }
 
 export interface IAppContext {
   actions: IAppActions;
   state: IAppState;
+}
+
+// Payload Interfaces
+export interface ISetCountdownPayload {
+  target: Date;
+  title: string;
 }

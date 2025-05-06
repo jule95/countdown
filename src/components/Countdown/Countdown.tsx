@@ -41,19 +41,21 @@ const Countdown: FC = () => {
 
     const response = apiState.response as IResponseCountdown;
 
-    actions.setTarget(new Date(response.target));
-    actions.setTitle(response.title);
+    actions.setCountdown({
+      title: apiState.response.title,
+      target: new Date(apiState.response.target),
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apiState.response]);
 
   useEffect(() => {
-    if (!state.target) {
+    if (!state.countdown.target) {
       return;
     }
 
     const interval = setInterval(() => {
       const duration = intervalToDuration({
-        end: state.target!,
+        end: state.countdown.target!,
         start: new Date(),
       });
 
@@ -68,7 +70,7 @@ const Countdown: FC = () => {
     }, 250);
 
     return () => clearInterval(interval);
-  }, [state.target]);
+  }, [state.countdown.target]);
 
   return (
     <div className="Countdown">
