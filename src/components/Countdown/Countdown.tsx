@@ -12,6 +12,7 @@ import AppContext from '../../state/app-context.ts';
 import { labels } from './Countdown.config.ts';
 import { useTranslation } from 'react-i18next';
 import { IResponseCountdown } from '../../common/interfaces/api.countdown.interfaces.ts';
+import React from 'react';
 
 const Countdown: FC = () => {
   const { t } = useTranslation();
@@ -72,12 +73,12 @@ const Countdown: FC = () => {
   return (
     <div className="Countdown">
       {Object.values(countdownState.countdown).map((value, index, arr) => (
-        <>
+        <React.Fragment key={`countdown-double-digit-${index}`}>
           <DoubleDigit
             label={t(labels[index])}
             number={value} />
           {index < arr.length - 1 && <Colon />}
-        </>
+        </React.Fragment>
       ))}
     </div>
   );
