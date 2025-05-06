@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { ChangeEvent, FC, useContext, useState } from 'react';
+import { ChangeEvent, FC, useContext, useEffect, useState } from 'react';
 import AppContext from '../../state/app-context.ts';
 import { Button, FormControl, FormLabel, TextField, Typography } from '@mui/material';
 import { modalStyles } from './CreatCountdown.config.ts';
@@ -9,6 +9,8 @@ import DateInput from '../DateInput/DateInput.tsx';
 import { ICreateCountdownFormState } from './CreateCountdown.types.ts';
 import { produce } from 'immer';
 import TimeInput from '../TimeInput/TimeInput.tsx';
+import { add, getHours, getMinutes, startOfDay } from 'date-fns';
+import LocalStorageHelper from '../../helpers/LocalStorageHelper.ts';
 
 const CreateCountdown: FC = () => {
   const { actions, state } = useContext(AppContext);
@@ -31,6 +33,31 @@ const CreateCountdown: FC = () => {
       draft.title = event.target.value;
     }));
   };
+
+  const handleCreateCountdown = () => {
+    const target = add(startOfDay(formState.date!), {
+      hours: getHours(formState.time!),
+      minutes: getMinutes(formState.time!),
+    });
+
+    actions.setCountdown({
+      target,
+      title: formState.title,
+    });
+  };
+
+  useEffect(() => {
+    if (!state.modal) {
+      return;
+    }
+
+    LocalStorageHelper.setCountdown({
+      target: state.countdown.target!.getTime(),
+      title: state.countdown.title,
+    });
+
+    actions.toggleModal();
+  }, [state.countdown]);
 
   return (
     <Modal
@@ -75,7 +102,7 @@ const CreateCountdown: FC = () => {
             onClick={actions.toggleModal}>
             {t(`createCountdown.cancel`)}
           </Button>
-          <Button>
+          <Button onClick={handleCreateCountdown}>
             {t(`createCountdown.create`)}
           </Button>
         </Box>

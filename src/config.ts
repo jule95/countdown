@@ -7,7 +7,6 @@ const config = {
   },
   routes: {
     home: `/`,
-    local: `/local`,
     // ToDo: Remove before deploying.
     playground: `/playground`,
   },
