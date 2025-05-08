@@ -42,8 +42,8 @@ const Countdown: FC = () => {
     const response = apiState.response as IResponseCountdown;
 
     actions.setCountdown({
-      title: apiState.response.title,
-      target: new Date(apiState.response.target),
+      title: response.title,
+      target: new Date(response.target),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apiState.response]);
