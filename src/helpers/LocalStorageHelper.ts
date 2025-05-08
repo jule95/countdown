@@ -11,7 +11,7 @@ class LocalStorageHelper {
       return null;
     }
 
-    return JSON.parse(ELocalStorageKeys.COUNTDOWN);
+    return JSON.parse(localStorage.getItem(ELocalStorageKeys.COUNTDOWN)!);
   }
 }
 

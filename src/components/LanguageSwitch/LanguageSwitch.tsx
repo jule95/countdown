@@ -8,6 +8,7 @@ const LanguageSwitch: FC = () => {
 
   return (
     <Box sx={{
+      alignItems: `center`,
       display: `flex`,
       flexDirection: `row`,
     }}>
