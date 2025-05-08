@@ -1,6 +1,9 @@
+import { ICountdownParams } from './common/interfaces/api.interfaces.ts';
+
 const config = {
   api: {
-    countdown: `/countdown`,
+    countdown: (params: ICountdownParams): string => `/countdowns/${params.id}`,
+    countdowns: `/countdown`,
   },
   routes: {
     home: `/`,

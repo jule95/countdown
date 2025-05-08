@@ -10,6 +10,7 @@ import Colon from '../Colon/Colon.tsx';
 import { useTranslation } from 'react-i18next';
 import useCountdown from '../../api/useCountdown.ts';
 import AppContext from '../../state/app-context.ts';
+import { IResponseCountdown } from '../../common/interfaces/api.countdown.interfaces.ts';
 
 const Countdown: FC = () => {
   const { t } = useTranslation();
@@ -35,7 +36,7 @@ const Countdown: FC = () => {
   const { actions, state } = useContext(AppContext);
 
   useEffect(() => {
-    void apiActions.getCountdown();
+    void apiActions.getCountdown({ id: 0 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -44,8 +45,10 @@ const Countdown: FC = () => {
       return;
     }
 
-    actions.setTarget(new Date(apiState.response.target));
-    actions.setTitle(apiState.response.title);
+    const response = apiState.response as IResponseCountdown;
+
+    actions.setTarget(new Date(response.target));
+    actions.setTitle(response.title);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apiState.response]);
 

@@ -1,6 +1,11 @@
 {
-  "countdown": {
+  "countdowns": [{
+    "id": 0,
     "target": 1751140800000,
     "title": "ENEI"
-  }
+  }, {
+    "id": 1,
+    "target": 1743289200000,
+    "title": "Test"
+  }]
 }
