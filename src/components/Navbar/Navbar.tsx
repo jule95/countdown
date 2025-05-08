@@ -13,14 +13,15 @@ const Navbar = () => {
   return (
     <AppBar position="absolute">
       <Toolbar variant="dense">
-        <Box sx={{
-          display: `flex`,
-          marginLeft: `auto`,
-        }}>
+        <Box
+          display="flex"
+          flexDirection="row"
+          gap={2}
+          sx={{ marginLeft: `auto` }}>
           <ButtonBase
             disableRipple
             onClick={actions.toggleModal}>
-            <AddBoxIcon sx={{ marginRight: `14px ` }} />
+            <AddBoxIcon />
           </ButtonBase>
           <LanguageSwitch />
         </Box>

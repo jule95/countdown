@@ -27,6 +27,14 @@ const theme = createTheme({
         },
       },
     },
+    MuiSelect: {
+      defaultProps: {
+        variant: `standard`,
+      },
+      styleOverrides: {
+        root: { width: `150px` },
+      },
+    },
     MuiTextField: {
       defaultProps: {
         fullWidth: true,
