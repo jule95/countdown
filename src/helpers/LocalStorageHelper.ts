@@ -1,5 +1,5 @@
-import { ILocalStorageCountdown } from '../common/interfaces/localStorage.interfaces.ts';
-import { ELocalStorageKeys } from '../common/enums/localStorage.enums.ts';
+import { ILocalStorageCountdown } from '../common/interfaces/ls.interfaces.ts';
+import { ELocalStorageKeys } from '../common/enums/ls.enums.ts';
 
 class LocalStorageHelper {
   static setCountdown(value: ILocalStorageCountdown) {

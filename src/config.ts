@@ -1,4 +1,4 @@
-import { ICountdownParams } from './common/interfaces/api.interfaces.ts';
+import { ICountdownParams } from './common/interfaces/api.countdown.interfaces.ts';
 
 const config = {
   api: {

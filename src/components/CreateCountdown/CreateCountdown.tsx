@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { ChangeEvent, FC, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useContext, useState } from 'react';
 import AppContext from '../../state/app-context.ts';
 import { Button, FormControl, FormLabel, TextField, Typography } from '@mui/material';
 import { modalStyles } from './CreatCountdown.config.ts';
@@ -40,24 +40,13 @@ const CreateCountdown: FC = () => {
       minutes: getMinutes(formState.time!),
     });
 
-    actions.setCountdown({
-      target,
-      title: formState.title,
-    });
-  };
-
-  useEffect(() => {
-    if (!state.modal) {
-      return;
-    }
-
     LocalStorageHelper.setCountdown({
-      target: state.countdown.target!.getTime(),
-      title: state.countdown.title,
+      target: target.getTime(),
+      title: formState.title,
     });
 
     actions.toggleModal();
-  }, [state.countdown]);
+  };
 
   return (
     <Modal

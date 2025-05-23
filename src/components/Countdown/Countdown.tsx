@@ -7,11 +7,9 @@ import { ICountdownState } from './Countdown.types.ts';
 import { produce } from 'immer';
 import DoubleDigit from '../DoubleDigit/DoubleDigit.tsx';
 import Colon from '../Colon/Colon.tsx';
-import useCountdown from '../../api/useCountdown.ts';
 import AppContext from '../../state/app-context.ts';
 import { labels } from './Countdown.config.ts';
 import { useTranslation } from 'react-i18next';
-import { IResponseCountdown } from '../../common/interfaces/api.countdown.interfaces.ts';
 import React from 'react';
 
 const Countdown: FC = () => {
@@ -26,27 +24,7 @@ const Countdown: FC = () => {
       seconds: 0,
     },
   });
-  const [apiActions, apiState] = useCountdown();
-  const { actions, state } = useContext(AppContext);
-
-  useEffect(() => {
-    void apiActions.getCountdown({ id: 0 });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (!apiState.response) {
-      return;
-    }
-
-    const response = apiState.response as IResponseCountdown;
-
-    actions.setCountdown({
-      title: response.title,
-      target: new Date(response.target),
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [apiState.response]);
+  const { state } = useContext(AppContext);
 
   useEffect(() => {
     if (!state.countdown.target) {
