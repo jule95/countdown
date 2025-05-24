@@ -2,20 +2,24 @@
   "translation": {
     "home": "Home",
     "countdown": {
-      "months": "Months",
-      "weeks": "Weeks",
       "days": "Days",
       "hours": "Hours",
       "minutes": "Minutes",
-      "seconds": "Seconds"
+      "months": "Months",
+      "seconds": "Seconds",
+      "weeks": "Weeks"
     },
-    "createCountdown": {
+    "modal": {
       "cancel": "Cancel",
       "create": "Create",
       "date": "Date",
       "heading": "Create Countdown",
       "time": "Time",
       "title": "Title"
+    },
+    "language": {
+      "german": "Deutsch",
+      "english": "English"
     }
   }
 }

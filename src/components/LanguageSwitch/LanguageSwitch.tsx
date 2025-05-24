@@ -1,27 +1,35 @@
 import { FC } from 'react';
-import { ButtonBase, Typography } from '@mui/material';
+import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import Box from '@mui/material/Box';
+import { options } from './LanguageSwitch.config.ts';
+import LanguageIcon from '@mui/icons-material/Language';
+import { sxSelect } from './LanguageSwitch.styles.ts';
 
 const LanguageSwitch: FC = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const handleChange = (event: SelectChangeEvent) => {
+    void i18n.changeLanguage(event.target.value);
+  };
 
   return (
-    <Box sx={{
-      alignItems: `center`,
-      display: `flex`,
-      flexDirection: `row`,
-    }}>
-      <ButtonBase
-        disableRipple
-        sx={{ fontWeight: i18n.language === `de` ? `bold` : `normal` }}
-        onClick={() => i18n.changeLanguage(`de`)}>DE</ButtonBase>
-      <Typography sx={{ margin: `0 4px` }}>/</Typography>
-      <ButtonBase
-        disableRipple
-        sx={{ fontWeight: i18n.language === `en` ? `bold` : `normal` }}
-        onClick={() => i18n.changeLanguage(`en`)}>EN</ButtonBase>
-    </Box>
+    <FormControl>
+      <Select
+        IconComponent={props => (
+          <LanguageIcon
+            {...props}
+            sx={{ fontSize: `20px` }} />
+        )}
+        sx={sxSelect}
+        value={i18n.language}
+        onChange={handleChange}>
+        {options.map(option => (
+          <MenuItem
+            sx={{ fontSize: `14px` }}
+            value={option.value}>{t(option.label)}</MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };
 
