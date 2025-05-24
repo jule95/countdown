@@ -1,19 +1,23 @@
 import { ECountdownActions } from '../enums/state.enums';
+import { ISetCountdownPayload } from './state.payload.interfaces.ts';
 
 export interface IStateAction {
   type: ECountdownActions;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  payload: any; // ToDo: Figure this out.
+  payload?: any; // ToDo: Figure this out.
 }
 
 export interface IAppState {
-  title: string;
-  target: Date | null;
+  countdown: {
+    target: Date | null;
+    title: string;
+  };
+  modal: boolean;
 }
 
 export interface IAppActions {
-  setTitle: (payload: string) => void;
-  setTarget: (payload: Date) => void;
+  setCountdown: (payload: ISetCountdownPayload) => void;
+  toggleModal: () => void;
 }
 
 export interface IAppContext {

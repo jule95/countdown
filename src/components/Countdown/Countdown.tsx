@@ -7,10 +7,10 @@ import { ICountdownState } from './Countdown.types.ts';
 import { produce } from 'immer';
 import DoubleDigit from '../DoubleDigit/DoubleDigit.tsx';
 import Colon from '../Colon/Colon.tsx';
-import { useTranslation } from 'react-i18next';
-import useCountdown from '../../api/useCountdown.ts';
 import AppContext from '../../state/app-context.ts';
-import { IResponseCountdown } from '../../common/interfaces/api.countdown.interfaces.ts';
+import { labels } from './Countdown.config.ts';
+import { useTranslation } from 'react-i18next';
+import React from 'react';
 
 const Countdown: FC = () => {
   const { t } = useTranslation();
@@ -23,43 +23,17 @@ const Countdown: FC = () => {
       minutes: 0,
       seconds: 0,
     },
-    labels: [
-      t(`countdown.months`),
-      t(`countdown.weeks`),
-      t(`countdown.days`),
-      t(`countdown.hours`),
-      t(`countdown.minutes`),
-      t(`countdown.seconds`),
-    ],
   });
-  const [apiActions, apiState] = useCountdown();
-  const { actions, state } = useContext(AppContext);
+  const { state } = useContext(AppContext);
 
   useEffect(() => {
-    void apiActions.getCountdown({ id: 0 });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (!apiState.response) {
-      return;
-    }
-
-    const response = apiState.response as IResponseCountdown;
-
-    actions.setTarget(new Date(response.target));
-    actions.setTitle(response.title);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [apiState.response]);
-
-  useEffect(() => {
-    if (!state.target) {
+    if (!state.countdown.target) {
       return;
     }
 
     const interval = setInterval(() => {
       const duration = intervalToDuration({
-        end: state.target!,
+        end: state.countdown.target!,
         start: new Date(),
       });
 
@@ -73,20 +47,18 @@ const Countdown: FC = () => {
       }));
     }, 250);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [state.target]);
+    return () => clearInterval(interval);
+  }, [state.countdown.target]);
 
   return (
     <div className="Countdown">
       {Object.values(countdownState.countdown).map((value, index, arr) => (
-        <>
+        <React.Fragment key={`countdown-double-digit-${index}`}>
           <DoubleDigit
-            label={countdownState.labels[index]}
+            label={t(labels[index])}
             number={value} />
           {index < arr.length - 1 && <Colon />}
-        </>
+        </React.Fragment>
       ))}
     </div>
   );

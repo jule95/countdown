@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import {
-  IResponseCountdown
-} from '../common/interfaces/api.countdown.interfaces.ts';
+import { ICountdownParams, IResponseCountdown } from '../common/interfaces/api.countdown.interfaces.ts';
 import ApiService from './ApiService';
 import config from '../config';
 import { produce } from 'immer';
 import ApiHelper from './ApiHelper';
-import { IApiError, ICountdownParams } from '../common/interfaces/api.interfaces';
+import { IApiError } from '../common/interfaces/api.interfaces';
 
 type TCountdownHook = [{
   getCountdown(params: ICountdownParams): Promise<void>,

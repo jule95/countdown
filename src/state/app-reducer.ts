@@ -4,11 +4,12 @@ import { ECountdownActions } from '../common/enums/state.enums';
 
 const appReducer = produce((draft: IAppState, action: IStateAction) => {
   switch (action.type) {
-    case ECountdownActions.SET_TITLE:
-      draft.title = action.payload;
+    case ECountdownActions.SET_COUNTDOWN:
+      draft.countdown.title = action.payload.title;
+      draft.countdown.target = action.payload.target;
       break;
-    case ECountdownActions.SET_TARGET:
-      draft.target = action.payload;
+    case ECountdownActions.SET_MODAL:
+      draft.modal = !draft.modal;
       break;
     default:
   }

@@ -3,3 +3,7 @@ export interface IResponseCountdown {
   target: number;
   title: string;
 }
+
+export interface ICountdownParams {
+  id: string;
+}

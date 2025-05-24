@@ -3,7 +3,3 @@ export interface IApiError {
   message: string;
   code: number;
 }
-
-export interface ICountdownParams {
-  id: number;
-}

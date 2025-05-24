@@ -1,13 +1,13 @@
-import { ICountdownParams } from './common/interfaces/api.interfaces.ts';
+import { ICountdownParams } from './common/interfaces/api.countdown.interfaces.ts';
 
 const config = {
   api: {
     countdown: (params: ICountdownParams): string => `/countdowns/${params.id}`,
-    countdowns: `/countdown`,
+    countdowns: `/countdowns`,
   },
   routes: {
-    home: `/`,
-    page1: `/page1`,
+    home: `/:id`,
+    homeDefault: `/`,
     // ToDo: Remove before deploying.
     playground: `/playground`,
   },

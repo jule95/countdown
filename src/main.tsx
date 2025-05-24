@@ -15,6 +15,9 @@ const router = createBrowserRouter([
   {
     children: [{
       element: <Home />,
+      path: config.routes.homeDefault,
+    }, {
+      element: <Home />,
       path: config.routes.home,
     },
     {
