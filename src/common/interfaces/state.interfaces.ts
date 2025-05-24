@@ -1,4 +1,5 @@
 import { ECountdownActions } from '../enums/state.enums';
+import { ISetCountdownPayload } from './state.payload.interfaces.ts';
 
 export interface IStateAction {
   type: ECountdownActions;
@@ -22,10 +23,4 @@ export interface IAppActions {
 export interface IAppContext {
   actions: IAppActions;
   state: IAppState;
-}
-
-// Payload Interfaces
-export interface ISetCountdownPayload {
-  target: Date;
-  title: string;
 }

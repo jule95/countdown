@@ -1,8 +1,9 @@
 import { FC, ReactElement, useReducer } from 'react';
 import appReducer from './app-reducer';
 import AppContext, { initState } from './app-context';
-import { IAppActions, ISetCountdownPayload } from '../common/interfaces/state.interfaces';
+import { IAppActions } from '../common/interfaces/state.interfaces';
 import { ECountdownActions } from '../common/enums/state.enums';
+import { ISetCountdownPayload } from '../common/interfaces/state.payload.interfaces.ts';
 
 const AppState:FC<{ children: ReactElement}> = props => {
   const [state, dispatch] = useReducer(appReducer, initState);
