@@ -18,12 +18,12 @@ const Navbar = () => {
           flexDirection="row"
           gap={2}
           sx={{ marginLeft: `auto` }}>
+          <LanguageSwitch />
           <ButtonBase
             disableRipple
             onClick={actions.toggleModal}>
             <AddBoxIcon />
           </ButtonBase>
-          <LanguageSwitch />
         </Box>
       </Toolbar>
     </AppBar>

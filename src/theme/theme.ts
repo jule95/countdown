@@ -10,14 +10,10 @@ const theme = createTheme({
     // @ts-expect-error TS2561
     MuiDateField: {
       defaultProps: {
-        fullWidth: true,
         variant: `standard`,
       },
     },
     MuiFormControl: {
-      styleOverrides: {
-        root: { width: `220px` },
-      },
     },
     MuiFormLabel: {
       styleOverrides: {
@@ -31,19 +27,14 @@ const theme = createTheme({
       defaultProps: {
         variant: `standard`,
       },
-      styleOverrides: {
-        root: { width: `150px` },
-      },
     },
     MuiTextField: {
       defaultProps: {
-        fullWidth: true,
         variant: `standard`,
       },
     },
     MuiTimeField: {
       defaultProps: {
-        fullWidth: true,
         variant: `standard`,
       },
     },
