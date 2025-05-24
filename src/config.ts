@@ -6,7 +6,8 @@ const config = {
     countdowns: `/countdowns`,
   },
   routes: {
-    home: `/`,
+    home: `/:id`,
+    homeDefault: `/`,
     // ToDo: Remove before deploying.
     playground: `/playground`,
   },
