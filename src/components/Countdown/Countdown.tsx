@@ -1,29 +1,15 @@
-/* eslint-disable sort-keys */
-
 import { FC, useContext, useEffect, useState } from 'react';
-import './Countdown.scss';
 import { intervalToDuration } from 'date-fns';
-import { ICountdownState } from './Countdown.types.ts';
 import { produce } from 'immer';
 import DoubleDigit from '../DoubleDigit/DoubleDigit.tsx';
-import Colon from '../Colon/Colon.tsx';
 import AppContext from '../../state/app-context.ts';
 import { labels } from './Countdown.config.ts';
 import { useTranslation } from 'react-i18next';
-import React from 'react';
+import { Box } from '@mui/material';
 
 const Countdown: FC = () => {
   const { t } = useTranslation();
-  const [countdownState, setCountdownState] = useState<ICountdownState>({
-    countdown: {
-      months: 0,
-      weeks: 0,
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-    },
-  });
+  const [countdown, setCountdown] = useState<number[]>([0, 0, 0, 0, 0, 0]);
   const { state } = useContext(AppContext);
 
   useEffect(() => {
@@ -32,35 +18,42 @@ const Countdown: FC = () => {
     }
 
     const interval = setInterval(() => {
+      const start = new Date();
+
       const duration = intervalToDuration({
         end: state.countdown.target!,
-        start: new Date(),
+        start,
       });
 
-      setCountdownState(produce(draft => {
-        draft.countdown.months =  duration.months ?? 0;
-        draft.countdown.weeks =  Math.floor((duration.days ?? 0) / 7);
-        draft.countdown.days =   (duration.days ?? 0) % 7;
-        draft.countdown.hours =  duration.hours ?? 0;
-        draft.countdown.minutes =  duration.minutes ?? 0;
-        draft.countdown.seconds =   duration.seconds ?? 0;
+      setCountdown(produce(draft => {
+        draft[0] = duration.months ?? 0;
+        draft[1] = Math.floor((duration.days ?? 0) / 7);
+        draft[2] = (duration.days ?? 0) % 7;
+        draft[3] = duration.hours ?? 0;
+        draft[4] = duration.minutes ?? 0;
+        draft[5] = duration.seconds ?? 0;
       }));
+
+      if (state.countdown.target!.getTime() - start.getTime() <= 0) {
+        clearInterval(interval);
+      }
     }, 250);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, [state.countdown.target]);
 
   return (
-    <div className="Countdown">
-      {Object.values(countdownState.countdown).map((value, index, arr) => (
-        <React.Fragment key={`countdown-double-digit-${index}`}>
-          <DoubleDigit
-            label={t(labels[index])}
-            number={value} />
-          {index < arr.length - 1 && <Colon />}
-        </React.Fragment>
+    <Box display="flex">
+      {countdown.map((value, index, arr) => (
+        <DoubleDigit
+          key={`countdown-double-digit-${index}`}
+          hasColon={index < arr.length - 1}
+          label={t(labels[index])}
+          number={value} />
       ))}
-    </div>
+    </Box>
   );
 };
 
