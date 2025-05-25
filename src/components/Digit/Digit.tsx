@@ -30,7 +30,7 @@ const Digit: FC<IDigitProps> = ({ className=``, number }) => (
             key={`digit-segment-${index}`}
             filled={activeSegments[number % 10]?.includes(index) ?? false}
             isHorizontal={segment.horizontal}
-            x={segment.x + config.konva.digitXOffset}
+            x={segment.x + config.konva.digitXOffset + config.konva.digitSpacing}
             y={segment.y} />
         ))}
       </Layer>

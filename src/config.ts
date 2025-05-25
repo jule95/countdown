@@ -2,7 +2,8 @@ import { ICountdownParams } from './common/interfaces/api.countdown.interfaces.t
 
 const digitSize = 5;
 const pointSize = 1.5;
-const spacing = 2;
+const digitSpacing = 1;
+const colonSpacing = 4;
 
 const config = {
   api: {
@@ -10,13 +11,15 @@ const config = {
     countdowns: `/countdowns`,
   },
   konva: {
-    colonHeight: 14 * pointSize,
+    colonHeight: (14 + colonSpacing) * pointSize,
+    colonSpacing,
     colonWidth: 7 * pointSize,
     digitHeight: 14 * digitSize,
-    digitSize: 5,
-    digitWidth: 16 * digitSize,
+    digitSize,
+    digitSpacing,
+    digitWidth: (16 + digitSpacing) * digitSize,
     digitXOffset: 8, // Width of single digit.
-    pointSize: 1.5,
+    pointSize,
   },
   routes: {
     home: `/:id`,
