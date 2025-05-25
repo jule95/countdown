@@ -1,14 +1,11 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { intervalToDuration } from 'date-fns';
 import { produce } from 'immer';
-import DoubleDigit from '../DoubleDigit/DoubleDigit.tsx';
 import AppContext from '../../state/app-context.ts';
-import { labels } from './Countdown.config.ts';
-import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
+import Digit from '../Digit/Digit.tsx';
 
 const Countdown: FC = () => {
-  const { t } = useTranslation();
   const [countdown, setCountdown] = useState<number[]>([0, 0, 0, 0, 0, 0]);
   const { state } = useContext(AppContext);
 
@@ -46,11 +43,9 @@ const Countdown: FC = () => {
 
   return (
     <Box display="flex">
-      {countdown.map((value, index, arr) => (
-        <DoubleDigit
+      {countdown.map((value, index) => (
+        <Digit
           key={`countdown-double-digit-${index}`}
-          hasColon={index < arr.length - 1}
-          label={t(labels[index])}
           number={value} />
       ))}
     </Box>
