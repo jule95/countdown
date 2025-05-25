@@ -1,7 +1,10 @@
 export const sxSelect = {
+  '& .MuiSelect-select': {
+    padding: `0 !important`,
+  },
   fontSize: `14px`,
   fontWeight: `bold`,
   letterSpacing: `0.5px`,
-  padding: `1px 8px 0px 0`,
+  margin: `2px 6px 0 0`,
   textTransform: `uppercase`,
 };
