@@ -5,8 +5,9 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { horizontal, vertical } from './Segment.config.ts';
 import Konva from 'konva';
 import { useTheme } from '@mui/material';
+import config from '../../config.ts';
 
-const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size = 10, filled = false }) => {
+const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, filled = false }) => {
   const [points, setPoints] = useState<number[]>([]);
   const segmentRef = useRef(null);
   const theme = useTheme();
@@ -27,8 +28,8 @@ const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size =
 
   useEffect(() => {
     const tempPoints = isHorizontal ? horizontal : vertical;
-    setPoints(tempPoints.map(point => point * size));
-  }, [size, isHorizontal]);
+    setPoints(tempPoints.map(point => point * config.konva.digitSize));
+  }, [isHorizontal]);
 
   return (
     <Line
@@ -37,8 +38,8 @@ const Segment: FC<ISegmentProps> = ({ isHorizontal = false, x = 0, y = 0, size =
       points={points}
       stroke={theme.countdown.strokeColor}
       strokeWidth={1}
-      x={x * size}
-      y={y * size} />
+      x={x * config.konva.digitSize}
+      y={y * config.konva.digitSize} />
   );
 };
 

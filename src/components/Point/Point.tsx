@@ -3,14 +3,15 @@ import { Line } from 'react-konva';
 import { points } from './Point.config.ts';
 import { IPointProps } from './Point.types.ts';
 import { useTheme } from '@mui/material';
+import config from '../../config.ts';
 
-const Point:FC<IPointProps> = ({ size = 1.5, x = 0, y = 0 }) => {
+const Point:FC<IPointProps> = ({ x = 0, y = 0 }) => {
   const [state, setState] = useState<number[]>([]);
   const theme = useTheme();
 
   useEffect(() => {
-    setState(points.map(point => point * size));
-  }, [size]);
+    setState(points.map(point => point * config.konva.pointSize));
+  }, []);
 
   return (
     <Line
@@ -19,8 +20,8 @@ const Point:FC<IPointProps> = ({ size = 1.5, x = 0, y = 0 }) => {
       points={state}
       stroke={theme.countdown.strokeColor}
       strokeWidth={1}
-      x={x * size}
-      y={y * size} />
+      x={x * config.konva.pointSize}
+      y={y * config.konva.pointSize} />
   );
 };
 

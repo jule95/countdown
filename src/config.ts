@@ -5,6 +5,10 @@ const config = {
     countdown: (params: ICountdownParams): string => `/countdowns/${params.id}`,
     countdowns: `/countdowns`,
   },
+  konva: {
+    digitSize: 5,
+    pointSize: 1.5,
+  },
   routes: {
     home: `/:id`,
     homeDefault: `/`,
