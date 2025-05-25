@@ -6,7 +6,6 @@ import { IDigitProps } from './Digit.types.ts';
 import { activeSegments, segments } from './Digit.config.ts';
 import ComponentHelper from '../../helpers/ComponentHelper.ts';
 import config from '../../config.ts';
-import Colon from '../Colon/Colon.tsx';
 
 const Digit: FC<IDigitProps> = ({ className=``, number }) => (
   <div className={ComponentHelper.className([
@@ -36,8 +35,6 @@ const Digit: FC<IDigitProps> = ({ className=``, number }) => (
         ))}
       </Layer>
     </Stage>
-
-    <Colon />
   </div>
 );
 

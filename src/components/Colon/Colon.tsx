@@ -3,8 +3,9 @@ import { Layer, Line, Stage } from 'react-konva';
 import { points } from './Colon.config.ts';
 import config from '../../config.ts';
 import { Box, useTheme } from '@mui/material';
+import { IColonProps } from './Colon.types.ts';
 
-const Colon: FC = () => {
+const Colon: FC<IColonProps> = props => {
   // ToDo: Move this logic.
   // (digit height * default size) / 2
   const theme = useTheme();
@@ -13,6 +14,10 @@ const Colon: FC = () => {
   useEffect(() => {
     setState(points.map(point => point * config.konva.pointSize));
   }, []);
+
+  if (!props.visible) {
+    return null;
+  }
 
   return (
     <Box

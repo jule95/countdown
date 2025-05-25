@@ -4,6 +4,7 @@ import { produce } from 'immer';
 import AppContext from '../../state/app-context.ts';
 import { Box } from '@mui/material';
 import Digit from '../Digit/Digit.tsx';
+import Colon from '../Colon/Colon.tsx';
 
 const Countdown: FC = () => {
   const [countdown, setCountdown] = useState<number[]>([0, 0, 0, 0, 0, 0]);
@@ -44,9 +45,12 @@ const Countdown: FC = () => {
   return (
     <Box display="flex">
       {countdown.map((value, index) => (
-        <Digit
-          key={`countdown-double-digit-${index}`}
-          number={value} />
+        <Box>
+          <Box display="flex">
+            <Digit number={value} />
+            <Colon visible={index < countdown.length - 1} />
+          </Box>
+        </Box>
       ))}
     </Box>
   );
