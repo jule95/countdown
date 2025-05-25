@@ -1,16 +1,18 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { intervalToDuration } from 'date-fns';
 import { produce } from 'immer';
-import DoubleDigit from '../DoubleDigit/DoubleDigit.tsx';
 import AppContext from '../../state/app-context.ts';
-import { labels } from './Countdown.config.ts';
+import { Box, Typography } from '@mui/material';
+import Digit from '../Digit/Digit.tsx';
+import Colon from '../Colon/Colon.tsx';
 import { useTranslation } from 'react-i18next';
-import { Box } from '@mui/material';
+import { labels } from './Countdown.config.ts';
+import { sxLabel } from './Countdown.styles.ts';
 
 const Countdown: FC = () => {
-  const { t } = useTranslation();
   const [countdown, setCountdown] = useState<number[]>([0, 0, 0, 0, 0, 0]);
   const { state } = useContext(AppContext);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!state.countdown.target) {
@@ -46,12 +48,14 @@ const Countdown: FC = () => {
 
   return (
     <Box display="flex">
-      {countdown.map((value, index, arr) => (
-        <DoubleDigit
-          key={`countdown-double-digit-${index}`}
-          hasColon={index < arr.length - 1}
-          label={t(labels[index])}
-          number={value} />
+      {countdown.map((value, index) => (
+        <Box>
+          <Box display="flex">
+            <Digit number={value} />
+            <Colon visible={index < countdown.length - 1} />
+          </Box>
+          <Typography sx={sxLabel}>{t(labels[index])}</Typography>
+        </Box>
       ))}
     </Box>
   );

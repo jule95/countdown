@@ -1,31 +1,50 @@
-import './Colon.scss';
-import { FC } from 'react';
-import Point from '../Point/Point.tsx';
-import { Layer, Stage } from 'react-konva';
-import { colonHeight, colonWidth } from './Colon.config.ts';
+import { FC, useEffect, useState } from 'react';
+import { Layer, Line, Stage } from 'react-konva';
+import { points } from './Colon.config.ts';
+import config from '../../config.ts';
+import { Box, useTheme } from '@mui/material';
 import { IColonProps } from './Colon.types.ts';
 
-const Colon: FC<IColonProps> = ({ size = 1.5 }) => {
+const Colon: FC<IColonProps> = props => {
   // ToDo: Move this logic.
   // (digit height * default size) / 2
-  const yOffset = (14 * 5) / 2;
+  const theme = useTheme();
+  const [state, setState] = useState<number[]>([]);
+
+  useEffect(() => {
+    setState(points.map(point => point * config.konva.pointSize));
+  }, []);
+
+  if (!props.visible) {
+    return null;
+  }
 
   return (
-    <div className="Colon">
-      <div style={{ transform: `translateY(calc(${yOffset}px - 50%))` }}>
-        <Stage
-          height={colonHeight * size}
-          width={colonWidth * size}>
-          <Layer>
-            <Point
-              size={size} />
-            <Point
-              size={size}
-              y={10} />
-          </Layer>
-        </Stage>
-      </div>
-    </div>
+    <Box
+      alignItems="center"
+      display="flex"
+      justifyContent="center"
+      sx={{ margin: `0 6px` }}>
+      <Stage
+        height={config.konva.colonHeight}
+        width={config.konva.colonWidth}>
+        <Layer>
+          <Line
+            closed
+            fill={theme.countdown.fillColor}
+            points={state}
+            stroke={theme.countdown.strokeColor}
+            strokeWidth={1} />
+          <Line
+            closed
+            fill={theme.countdown.fillColor}
+            points={state}
+            stroke={theme.countdown.strokeColor}
+            strokeWidth={1}
+            y={config.konva.colonWidth + config.konva.colonSpacing} />
+        </Layer>
+      </Stage>
+    </Box>
   );
 };
 

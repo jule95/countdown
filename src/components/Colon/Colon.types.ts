@@ -1,3 +1,3 @@
 export interface IColonProps {
-  size?: number;
+  visible: boolean;
 }
