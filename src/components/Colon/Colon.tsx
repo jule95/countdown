@@ -25,8 +25,8 @@ const Colon: FC<IColonProps> = props => {
       display="flex"
       justifyContent="center">
       <Stage
-        height={config.konva.colonHeight * config.konva.pointSize}
-        width={config.konva.colonWidth * config.konva.pointSize}>
+        height={config.konva.colonHeight}
+        width={config.konva.colonWidth}>
         <Layer>
           <Line
             closed
@@ -40,7 +40,7 @@ const Colon: FC<IColonProps> = props => {
             points={state}
             stroke={theme.countdown.strokeColor}
             strokeWidth={1}
-            y={config.konva.colonWidth * config.konva.pointSize} />
+            y={config.konva.colonWidth} />
         </Layer>
       </Stage>
     </Box>

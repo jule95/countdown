@@ -10,11 +10,12 @@ const config = {
     countdowns: `/countdowns`,
   },
   konva: {
-    colonHeight: 14,
-    colonWidth: 7,
-    digitHeight: 14,
+    colonHeight: 14 * pointSize,
+    colonWidth: 7 * pointSize,
+    digitHeight: 14 * digitSize,
     digitSize: 5,
-    digitWidth: 16,
+    digitWidth: 16 * digitSize,
+    digitXOffset: 8, // Width of single digit.
     pointSize: 1.5,
   },
   routes: {

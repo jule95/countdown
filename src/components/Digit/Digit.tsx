@@ -13,8 +13,8 @@ const Digit: FC<IDigitProps> = ({ className=``, number }) => (
     className,
   ])}>
     <Stage
-      height={config.konva.digitHeight * config.konva.digitSize}
-      width={config.konva.digitWidth * config.konva.digitSize}>
+      height={config.konva.digitHeight}
+      width={config.konva.digitWidth}>
       <Layer>
         {segments.map((segment, index) => (
           <Segment
@@ -30,7 +30,7 @@ const Digit: FC<IDigitProps> = ({ className=``, number }) => (
             key={`digit-segment-${index}`}
             filled={activeSegments[number % 10]?.includes(index) ?? false}
             isHorizontal={segment.horizontal}
-            x={segment.x + config.konva.digitWidth / 2}
+            x={segment.x + config.konva.digitXOffset}
             y={segment.y} />
         ))}
       </Layer>
