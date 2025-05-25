@@ -2,13 +2,17 @@ import { FC, useContext, useEffect, useState } from 'react';
 import { intervalToDuration } from 'date-fns';
 import { produce } from 'immer';
 import AppContext from '../../state/app-context.ts';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Digit from '../Digit/Digit.tsx';
 import Colon from '../Colon/Colon.tsx';
+import { useTranslation } from 'react-i18next';
+import { labels } from './Countdown.config.ts';
+import { sxLabel } from './Countdown.styles.ts';
 
 const Countdown: FC = () => {
   const [countdown, setCountdown] = useState<number[]>([0, 0, 0, 0, 0, 0]);
   const { state } = useContext(AppContext);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!state.countdown.target) {
@@ -50,6 +54,7 @@ const Countdown: FC = () => {
             <Digit number={value} />
             <Colon visible={index < countdown.length - 1} />
           </Box>
+          <Typography sx={sxLabel}>{t(labels[index])}</Typography>
         </Box>
       ))}
     </Box>
