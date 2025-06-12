@@ -5,7 +5,7 @@ import { Container, CssBaseline, ThemeProvider } from '@mui/material';
 import theme from './theme/theme.ts';
 import Navbar from './components/Navbar/Navbar.tsx';
 import Toolbar from '@mui/material/Toolbar';
-import CreateCountdown from './components/CreateCountdown/CreateCountdown.tsx';
+import CustomModal from './components/Modal/CustomModal.tsx';
 
 const App = () => (
   <div className="App">
@@ -16,7 +16,7 @@ const App = () => (
       <Container>
         <Outlet />
       </Container>
-      <CreateCountdown />
+      <CustomModal title="[MODAL]" />
     </ThemeProvider>
   </div>
 );
